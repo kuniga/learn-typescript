@@ -33,7 +33,6 @@ RUN git clone https://github.com/nodenv/node-build.git ${HOME}/.nodenv/plugins/n
 RUN ${HOME}/.nodenv/bin/nodenv install -s ${NODE_VERSION}
 RUN ${HOME}/.nodenv/bin/nodenv global ${NODE_VERSION}
 RUN ${HOME}/.nodenv/shims/npm install -g yarn@${YARN_VERSION}
-RUN ${HOME}/.nodenv/shims/npm install -g lite-server nodemon ts-node typescript
 RUN ${HOME}/.nodenv/bin/nodenv rehash
 
 # chown
