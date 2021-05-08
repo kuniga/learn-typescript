@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  dev:
+    build:
+      context: .docker/dev
+      dockerfile: Dockerfile
+    hostname: dev
+    user: vscode
+    volumes:
+      - .:/home/vscode/workspace:cached
+    working_dir: /home/vscode/workspace
+    command: sleep infinity

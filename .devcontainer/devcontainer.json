@@ -1,0 +1,22 @@
+{
+  "name": "TypeScript & Node.JS",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "dev",
+  "workspaceFolder": "/home/vscode/workspace",
+  "settings": {
+    "editor.formatOnSave": true,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "extensions": [
+    "christian-kohler.path-intellisense",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "ms-ceintl.vscode-language-pack-ja",
+    "msjsdiag.debugger-for-chrome",
+    "shardulm94.trailing-spaces"
+  ],
+  "postCreateCommand": ".docker/dev/post_create_command.sh",
+  "remoteUser": "vscode"
+}
