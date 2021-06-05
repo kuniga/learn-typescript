@@ -1,5 +1,6 @@
 #!/bin/bash
 
-cd ~/workspace
+set -e -x
+
 touch .envrc
 direnv allow
