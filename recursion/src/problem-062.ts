@@ -13,7 +13,7 @@ const invertAllBits = (input: string) => {
 };
 
 const incrementBinary = (input: string) => {
-  let outputArray = input.split('');
+  const outputArray = input.split('');
   let moveUp = true;
   for (let idx = outputArray.length - 1; idx >= 0; idx--) {
     if (!moveUp) {
