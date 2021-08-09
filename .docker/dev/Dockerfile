@@ -5,7 +5,7 @@ FROM mcr.microsoft.com/vscode/devcontainers/base:${VARIANT}
 ARG USERNAME=vscode
 ARG GROUPNAME=vscode
 ARG HOME=/home/${USERNAME}
-ARG NODE_VERSION=14.17.0
+ARG NODE_VERSION=14.17.4
 ARG YARN_VERSION=1.22.10
 
 # [Optional] Uncomment this section to install additional OS packages.
