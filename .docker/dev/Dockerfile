@@ -21,9 +21,12 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 # timezone
 RUN ln -sf /usr/share/zoneinfo/Japan /etc/localtime
 
+# switch user
+USER ${USERNAME}
+
 # base config
-COPY home/additional_script.sh /tmp/
-COPY home/bashrc.d/* ${HOME}/.bashrc.d/
+COPY --chown=${USERNAME}:${GROUPNAME} home/additional_script.sh /tmp/
+COPY --chown=${USERNAME}:${GROUPNAME} home/bashrc.d/* ${HOME}/.bashrc.d/
 RUN cp -p ${HOME}/.bashrc ${HOME}/.bashrc.oh-my-bash \
     && cat /etc/skel/.bashrc /tmp/additional_script.sh > ${HOME}/.bashrc \
     && rm /tmp/additional_script.sh

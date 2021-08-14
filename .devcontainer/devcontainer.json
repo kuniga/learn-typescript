@@ -4,18 +4,27 @@
   "service": "dev",
   "workspaceFolder": "/home/vscode/workspace",
   "settings": {
-    "editor.formatOnSave": true,
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
-    "terminal.integrated.shell.linux": "/bin/bash"
+    "terminal.integrated.defaultProfiles.linux": "/bin/bash",
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true,
+      "editor.tabSize": 2
+    },
+    "typescript.preferences.importModuleSpecifier": "relative",
+    "typescript.updateImportsOnFileMove.enabled": "always",
   },
   "extensions": [
     "christian-kohler.path-intellisense",
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "ms-ceintl.vscode-language-pack-ja",
-    "msjsdiag.debugger-for-chrome",
-    "shardulm94.trailing-spaces"
+    "oderwat.indent-rainbow",
+    "quicktype.quicktype",
+    "shardulm94.trailing-spaces",
+    "wallabyjs.quokka-vscode",
+    "wmaurer.change-case",
   ],
   "postCreateCommand": ".docker/dev/post_create_command.sh",
   "remoteUser": "vscode"
