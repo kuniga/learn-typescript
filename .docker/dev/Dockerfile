@@ -5,8 +5,9 @@ FROM mcr.microsoft.com/vscode/devcontainers/base:${VARIANT}
 ARG USERNAME=vscode
 ARG GROUPNAME=vscode
 ARG HOME=/home/${USERNAME}
-ARG NODE_VERSION=14.17.4
-ARG YARN_VERSION=1.22.10
+ARG NODENV_ROOT=${HOME}/.nodenv
+ARG NODE_VERSION=14.18.2
+ARG YARN_VERSION=1.22.17
 
 # [Optional] Uncomment this section to install additional OS packages.
 COPY packages.txt /tmp/
@@ -32,12 +33,12 @@ RUN cp -p ${HOME}/.bashrc ${HOME}/.bashrc.oh-my-bash \
     && rm /tmp/additional_script.sh
 
 # Node.JS
-RUN git clone https://github.com/nodenv/nodenv.git ${HOME}/.nodenv \
-    && git clone https://github.com/nodenv/node-build.git ${HOME}/.nodenv/plugins/node-build \
-    && ${HOME}/.nodenv/bin/nodenv install -s ${NODE_VERSION} \
-    && ${HOME}/.nodenv/bin/nodenv global ${NODE_VERSION} \
-    && ${HOME}/.nodenv/shims/npm install -g yarn@${YARN_VERSION} \
-    && ${HOME}/.nodenv/bin/nodenv rehash
+RUN git clone https://github.com/nodenv/nodenv.git ${NODENV_ROOT} \
+    && git clone https://github.com/nodenv/node-build.git ${NODENV_ROOT}/plugins/node-build \
+    && ${NODENV_ROOT}/bin/nodenv install -s ${NODE_VERSION} \
+    && ${NODENV_ROOT}/bin/nodenv global ${NODE_VERSION} \
+    && ${NODENV_ROOT}/shims/npm install -g yarn@${YARN_VERSION} \
+    && ${NODENV_ROOT}/bin/nodenv rehash
 
 # chown
 RUN chown -R ${USERNAME}:${GROUPNAME} ${HOME}

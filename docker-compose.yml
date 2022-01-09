@@ -8,6 +8,10 @@ services:
     hostname: dev
     user: vscode
     volumes:
-      - .:/home/vscode/workspace:cached
+      - .:/home/vscode/hostdir
+      - workspace-data:/home/vscode/workspace
     working_dir: /home/vscode/workspace
     command: sleep infinity
+
+volumes:
+  workspace-data:

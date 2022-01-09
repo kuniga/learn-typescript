@@ -26,6 +26,6 @@
     "wallabyjs.quokka-vscode",
     "wmaurer.change-case",
   ],
-  "postCreateCommand": ".docker/dev/post_create_command.sh",
+  "postCreateCommand": "../hostdir/.docker/dev/post_create_command.sh",
   "remoteUser": "vscode"
 }
