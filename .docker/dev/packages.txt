@@ -3,7 +3,6 @@ bash-completion
 direnv
 dnsutils
 dstat
-dumb-init
 file
 iputils-ping
 ldap-utils
@@ -14,6 +13,7 @@ openssh-server
 peco
 python3-pip
 rsync
+tini
 tzdata
 vim
 xz-utils
