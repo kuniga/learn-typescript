@@ -1,12 +1,9 @@
-# [Choice] Ubuntu version: bionic, focal
-ARG VARIANT=jammy
-FROM mcr.microsoft.com/vscode/devcontainers/base:${VARIANT}
+ARG VARIANT=18-slim
+FROM node:${VARIANT}
 
-ARG USERNAME=vscode
-ARG GROUPNAME=vscode
+ARG USERNAME=node
+ARG GROUPNAME=node
 ARG HOME=/home/${USERNAME}
-ARG NODENV_ROOT=${HOME}/.nodenv
-ARG NODE_VERSION=18.17.0
 
 # [Optional] Uncomment this section to install additional OS packages.
 COPY packages.txt /tmp/
@@ -15,31 +12,24 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && rm /tmp/packages.txt
 
 # sudo
-# sed -e "s/vscode/${USERNAME}/" /etc/sudoers.d/vscode > /etc/sudoers.d/${USERNAME}
-# chmod --reference=/etc/sudoers.d/vscode /etc/sudoers.d/${USERNAME}
+RUN echo "${USERNAME} ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/${USERNAME} \
+    && chmod 0440 /etc/sudoers.d/${USERNAME} \
+    && visudo -c
 
 # timezone
 RUN ln -sf /usr/share/zoneinfo/Japan /etc/localtime
 
 # switch user
 USER ${USERNAME}
+WORKDIR ${HOME}/workspace
 
 # base config
 COPY --chown=${USERNAME}:${GROUPNAME} home/additional_script.sh /tmp/
 COPY --chown=${USERNAME}:${GROUPNAME} home/bashrc.d/* ${HOME}/.bashrc.d/
-RUN cp -p ${HOME}/.bashrc ${HOME}/.bashrc.oh-my-bash \
-    && cat /etc/skel/.bashrc /tmp/additional_script.sh > ${HOME}/.bashrc \
+RUN cat /tmp/additional_script.sh >> ${HOME}/.bashrc \
     && rm /tmp/additional_script.sh
 
-# Node.js
-RUN git clone https://github.com/nodenv/nodenv.git ${NODENV_ROOT} \
-    && git clone https://github.com/nodenv/node-build.git ${NODENV_ROOT}/plugins/node-build \
-    && ${NODENV_ROOT}/bin/nodenv install -s ${NODE_VERSION} \
-    && ${NODENV_ROOT}/bin/nodenv global ${NODE_VERSION} \
-    && ${NODENV_ROOT}/shims/corepack enable yarn \
-    && ${NODENV_ROOT}/bin/nodenv rehash
-
 # chown
-RUN chown -R ${USERNAME}:${GROUPNAME} ${HOME}
+# RUN chown -R ${USERNAME}:${GROUPNAME} ${HOME}
 
 ENTRYPOINT ["/usr/bin/tini", "--"]

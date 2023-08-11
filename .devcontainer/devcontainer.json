@@ -2,7 +2,7 @@
   "name": "TypeScript & Node.JS",
   "dockerComposeFile": "../compose.yaml",
   "service": "dev",
-  "workspaceFolder": "/home/vscode/workspace",
+  "workspaceFolder": "/home/node/workspace",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -32,5 +32,5 @@
     }
   },
   "postCreateCommand": "../hostdir/.docker/dev/post_create_command.sh",
-  "remoteUser": "vscode"
+  "remoteUser": "node"
 }

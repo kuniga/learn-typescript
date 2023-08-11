@@ -6,11 +6,11 @@ services:
       context: .docker/dev
       dockerfile: Dockerfile
     hostname: dev
-    user: vscode
+    user: node
     volumes:
-      - .:/home/vscode/hostdir
-      - workspace-data:/home/vscode/workspace
-    working_dir: /home/vscode/workspace
+      - .:/home/node/hostdir
+      - workspace-data:/home/node/workspace
+    working_dir: /home/node/workspace
     command: sleep infinity
 
 volumes:
